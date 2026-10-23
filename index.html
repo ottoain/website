@@ -195,13 +195,12 @@
         <a href="#contact" class="mobile-link font-spartan font-bold text-3xl tracking-[0.2em] uppercase hover:text-coral transition-colors">Contact</a>
     </div>
 
-    <!-- Hero Section with Fluid Typography -->
+    <!-- Hero Section -->
     <section class="relative min-h-[90vh] md:min-h-[85vh] flex flex-col justify-center items-center pt-24 px-4 md:px-6 overflow-hidden">
         <div class="text-center z-10 max-w-6xl mx-auto w-full">
             <h2 class="font-sans text-xs md:text-sm text-gray-400 mb-4 md:mb-6 tracking-[0.3em] uppercase font-light px-2">
                 High-Retention Video Editing
             </h2>
-            <!-- Fluid Typography: Scales automatically between 3rem (mobile) and 9rem (desktop) -->
             <h1 class="font-spartan font-black text-[clamp(3.5rem,8vw,9rem)] leading-[0.85] tracking-tighter uppercase mb-6 md:mb-8 drop-shadow-2xl">
                 Mastering <br />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-coral to-red-600">The Hook.</span>
@@ -222,7 +221,6 @@
             <p class="font-spartan text-[10px] md:text-xs tracking-[0.2em] text-gray-500 uppercase text-center md:text-left">Trusted By</p>
         </div>
         <div class="marquee-container w-full">
-            <!-- First track -->
             <div class="marquee-content flex items-center gap-12 md:gap-16 px-4 md:px-8">
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest">CreatorCo</span>
                 <span class="text-coral/50">•</span>
@@ -237,7 +235,6 @@
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest">Nexus</span>
                 <span class="text-coral/50">•</span>
             </div>
-            <!-- Duplicated track for seamless loop -->
             <div class="marquee-content flex items-center gap-12 md:gap-16 px-4 md:px-8" aria-hidden="true">
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest">CreatorCo</span>
                 <span class="text-coral/50">•</span>
@@ -268,19 +265,25 @@
                 </p>
             </div>
 
-            <!-- CSS Grid for 9:16 Vertical Videos (1 col mobile, 2 tablet, 3 desktop) -->
+            <!-- CSS Grid for 9:16 Vertical Videos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
                 
                 <!-- Video Item 1 -->
-                <div class="group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none">
-                    <!-- Replace the src with your actual .mp4 file -->
-                    <video src="Puurojengi-9v3.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+1+Placeholder" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
+                <div class="video-card group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none cursor-pointer">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none"></div>
+                    <video src="Puurojengi-9v3.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+1+Placeholder" autoplay loop muted playsinline class="video-element absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
                     
-                    <!-- Decorative play icon overlay -->
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100 pointer-events-none hidden md:flex">
-                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none z-10"></div>
+                    
+                    <!-- Mute/Unmute Button (Top Right) -->
+                    <button class="mute-btn absolute top-4 right-4 z-30 w-10 h-10 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md text-coral opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-coral hover:text-white shadow-lg" aria-label="Toggle Mute">
+                        <svg class="mute-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                        <svg class="unmute-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    </button>
+
+                    <!-- Play Overlay (Appears on Pause) -->
+                    <div class="play-overlay absolute inset-0 flex items-center justify-center z-20 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md shadow-[0_0_20px_rgba(255,92,71,0.3)]">
                             <svg class="w-6 h-6 text-coral ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
@@ -292,13 +295,21 @@
                 </div>
 
                 <!-- Video Item 2 -->
-                <div class="group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none">
-                    <video src="STUHIBURN1.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+2+Placeholder" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
+                <div class="video-card group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none cursor-pointer">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none"></div>
+                    <video src="STUHIBURN1.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+2+Placeholder" autoplay loop muted playsinline class="video-element absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
                     
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100 pointer-events-none hidden md:flex">
-                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none z-10"></div>
+                    
+                    <!-- Mute/Unmute Button (Top Right) -->
+                    <button class="mute-btn absolute top-4 right-4 z-30 w-10 h-10 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md text-coral opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-coral hover:text-white shadow-lg" aria-label="Toggle Mute">
+                        <svg class="mute-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                        <svg class="unmute-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    </button>
+
+                    <!-- Play Overlay (Appears on Pause) -->
+                    <div class="play-overlay absolute inset-0 flex items-center justify-center z-20 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md shadow-[0_0_20px_rgba(255,92,71,0.3)]">
                             <svg class="w-6 h-6 text-coral ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
@@ -310,13 +321,21 @@
                 </div>
 
                 <!-- Video Item 3 -->
-                <div class="group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none">
-                    <video src="Pelkokerroin1.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+3+Placeholder" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
+                <div class="video-card group relative aspect-[9/16] bg-midnightLight rounded-lg overflow-hidden shadow-2xl tech-border flex flex-col justify-end w-full max-w-[400px] mx-auto sm:max-w-none cursor-pointer">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none"></div>
+                    <video src="Pelkokerroin1.mov" poster="https://placehold.co/1080x1920/001a33/ffffff?text=Video+3+Placeholder" autoplay loop muted playsinline class="video-element absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"></video>
                     
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100 pointer-events-none hidden md:flex">
-                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-transparent to-transparent pointer-events-none z-10"></div>
+                    
+                    <!-- Mute/Unmute Button (Top Right) -->
+                    <button class="mute-btn absolute top-4 right-4 z-30 w-10 h-10 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md text-coral opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-coral hover:text-white shadow-lg" aria-label="Toggle Mute">
+                        <svg class="mute-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                        <svg class="unmute-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    </button>
+
+                    <!-- Play Overlay (Appears on Pause) -->
+                    <div class="play-overlay absolute inset-0 flex items-center justify-center z-20 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <div class="w-16 h-16 rounded-full border border-coral/50 flex items-center justify-center bg-midnight/80 backdrop-blur-md shadow-[0_0_20px_rgba(255,92,71,0.3)]">
                             <svg class="w-6 h-6 text-coral ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
@@ -327,7 +346,6 @@
                     </div>
                 </div>
 
-                <!-- Note: Add more blocks exactly like above if you have more than 3 videos -->
             </div>
         </div>
     </section>
@@ -341,7 +359,6 @@
     <section id="about" class="py-20 md:py-32 px-4 md:px-6 relative z-10">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-24">
             
-            <!-- Picture Area (Stacks on top for mobile) -->
             <div class="w-full md:w-5/12 max-w-[400px] md:max-w-none mx-auto">
                 <div class="aspect-[4/5] bg-midnight rounded-lg overflow-hidden relative group tech-border shadow-2xl">
                     <img src="https://placehold.co/800x1000/001a33/ffffff?text=Profile+Picture" alt="Otto Ainetdin" class="w-full h-full object-cover opacity-90 md:mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700">
@@ -349,7 +366,6 @@
                 </div>
             </div>
 
-            <!-- About Text Area -->
             <div class="w-full md:w-7/12 space-y-6 md:space-y-8 text-center md:text-left">
                 <div>
                     <h2 class="font-spartan font-bold text-3xl md:text-5xl uppercase leading-none mb-2 md:mb-3">
@@ -423,12 +439,54 @@
 
         function toggleMenu() {
             mobileMenu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when menu is open
+            document.body.classList.toggle('overflow-hidden');
         }
 
         mobileMenuBtn.addEventListener('click', toggleMenu);
         closeMenuBtn.addEventListener('click', toggleMenu);
         mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Shortform Video Player Interactions
+        document.querySelectorAll('.video-card').forEach(card => {
+            const video = card.querySelector('.video-element');
+            const playOverlay = card.querySelector('.play-overlay');
+            const muteBtn = card.querySelector('.mute-btn');
+            const muteIcon = card.querySelector('.mute-icon');
+            const unmuteIcon = card.querySelector('.unmute-icon');
+
+            // Handle Play/Pause Toggle
+            const togglePlay = () => {
+                if (video.paused) {
+                    video.play();
+                    playOverlay.classList.remove('opacity-100');
+                    playOverlay.classList.add('opacity-0');
+                } else {
+                    video.pause();
+                    playOverlay.classList.remove('opacity-0');
+                    playOverlay.classList.add('opacity-100');
+                }
+            };
+
+            // Handle Mute/Unmute Toggle
+            const toggleMute = (e) => {
+                e.stopPropagation(); // Prevents the card click event (play/pause) from firing
+                if (video.muted) {
+                    video.muted = false;
+                    muteIcon.classList.add('hidden');
+                    unmuteIcon.classList.remove('hidden');
+                } else {
+                    video.muted = true;
+                    muteIcon.classList.remove('hidden');
+                    unmuteIcon.classList.add('hidden');
+                }
+            };
+
+            // Clicking anywhere on the card toggles play/pause
+            card.addEventListener('click', togglePlay);
+            
+            // Clicking the mute button toggles audio
+            muteBtn.addEventListener('click', toggleMute);
+        });
     </script>
 </body>
 </html>
