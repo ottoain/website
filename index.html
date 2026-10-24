@@ -114,7 +114,7 @@
             .tech-border::after { bottom: 0; right: 0; opacity: 0.5; width: 15px; height: 15px; }
         }
 
-        /* Infinite Marquee Animation - Fixed Spacing */
+        /* Infinite Marquee Animation - Flawless Loop Setup */
         .marquee-container {
             display: flex;
             overflow: hidden;
@@ -127,10 +127,10 @@
             display: flex;
             flex-shrink: 0;
             align-items: center;
-            /* Using exact matching gap and padding to create a flawless loop */
+            /* Gap and Padding must be EXACTLY the same for the loop to snap perfectly */
             gap: 4rem; 
             padding-right: 4rem; 
-            animation: scroll 25s linear infinite;
+            animation: scroll 20s linear infinite;
         }
 
         @media (min-width: 768px) {
@@ -145,11 +145,11 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Scroll Reveal Animations */
+        /* Scroll Reveal Animations (Subtle Resetting Effect) */
         .reveal-up {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(20px); /* Reduced from 40px for a softer impact on repeat scrolls */
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
         .reveal-up.active {
@@ -210,14 +210,14 @@
             <h2 class="reveal-up font-sans text-xs md:text-sm text-gray-400 mb-4 md:mb-6 tracking-[0.3em] uppercase font-light px-2" style="transition-delay: 100ms;">
                 Where skill meets Creativity
             </h2>
-            <h1 class="reveal-up font-spartan font-black text-[clamp(3.5rem,8vw,9rem)] leading-[0.85] tracking-tighter uppercase mb-6 md:mb-8 drop-shadow-2xl" style="transition-delay: 300ms;">
+            <h1 class="reveal-up font-spartan font-black text-[clamp(3.5rem,8vw,9rem)] leading-[0.85] tracking-tighter uppercase mb-6 md:mb-8 drop-shadow-2xl" style="transition-delay: 250ms;">
                 Editor & <br />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-coral to-red-600">Cinematographer.</span>
             </h1>
-            <p class="reveal-up font-sans text-[clamp(1rem,2vw,1.25rem)] text-gray-300 mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed font-light px-4" style="transition-delay: 500ms;">
+            <p class="reveal-up font-sans text-[clamp(1rem,2vw,1.25rem)] text-gray-300 mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed font-light px-4" style="transition-delay: 400ms;">
                 Your vision expressed through my craftmanship = A product you will not regret.
             </p>
-            <div class="reveal-up" style="transition-delay: 700ms;">
+            <div class="reveal-up" style="transition-delay: 550ms;">
                 <a href="#work" class="inline-flex items-center gap-3 bg-coral hover:bg-purewhite hover:text-midnight text-purewhite font-spartan font-bold text-xs md:text-sm tracking-[0.2em] uppercase px-8 py-4 transition-all duration-300 shadow-[0_0_20px_rgba(255,92,71,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
                     View Edits
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
@@ -227,7 +227,7 @@
     </section>
 
     <!-- Client Marquee Section -->
-    <div class="reveal-up w-full bg-midnightLight/30 border-y border-white/5 py-6 md:py-8 relative z-10" style="transition-delay: 900ms;">
+    <div class="reveal-up w-full bg-midnightLight/30 border-y border-white/5 py-6 md:py-8 relative z-10" style="transition-delay: 700ms;">
         <div class="max-w-7xl mx-auto px-4 md:px-6 mb-3 md:mb-4">
             <p class="font-spartan text-[10px] md:text-xs tracking-[0.2em] text-gray-500 uppercase text-center md:text-left">Trusted By</p>
         </div>
@@ -240,7 +240,7 @@
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest whitespace-nowrap">Placeholder1</span>
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest whitespace-nowrap">Placeholder2</span>
             </div>
-            <!-- Duplicated track for seamless loop -->
+            <!-- Duplicated track for perfect seamless loop -->
             <div class="marquee-content" aria-hidden="true">
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest whitespace-nowrap">AlMedia</span>
                 <span class="font-spartan font-bold text-xl md:text-4xl text-white/40 uppercase tracking-widest whitespace-nowrap">Podlift</span>
@@ -442,19 +442,27 @@
             });
         });
 
-        // Scroll Reveal Animation Logic
+        // Continuous Subtler Scroll Reveal Animation Logic
         const revealElements = document.querySelectorAll('.reveal-up');
         
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Run once per element
+                    
+                    // After the initial delayed load, remove the delay so scrolling up and down feels instantly responsive
+                    setTimeout(() => {
+                        entry.target.style.transitionDelay = '0ms';
+                    }, 800); 
+
+                } else {
+                    // Remove the class when it leaves the screen so it animates again when you scroll back
+                    entry.target.classList.remove('active');
                 }
             });
         }, {
             root: null,
-            rootMargin: '0px 0px -50px 0px',
+            rootMargin: '0px 0px -50px 0px', 
             threshold: 0.1
         });
 
